@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $root = "/ericknathan/crud";
+    $root = "/ericknathan/crud-php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

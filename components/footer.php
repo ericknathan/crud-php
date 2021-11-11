@@ -1,5 +1,5 @@
 <?php
-  $root = "/ericknathan/crud";
+  $root = "/ericknathan/crud-php";
 ?>
 
 </body>

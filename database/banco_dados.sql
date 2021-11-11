@@ -1,8 +1,8 @@
 #CRIAR O BANCO DE DADOS:
-create database db_registration;
+create database db_cadastro;
 
 #HABILITAR O BANCO DE DADOS:
-use db_registration;
+use db_cadastro;
 
 #CRIAR A TABELA DE PESSOAS NO BANCO DE DADOS:
 create table tbl_user (
