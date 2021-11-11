@@ -2,7 +2,7 @@
 
   $HOST = "localhost";
   $USER = "root";
-  $PASSWORD = "140805";
+  $PASSWORD = "bcd127";
   $DATABASE = "db_cadastro";
 
   $conn = @new mysqli($HOST, $USER, $PASSWORD, $DATABASE);

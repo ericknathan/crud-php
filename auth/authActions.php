@@ -1,18 +1,19 @@
 <?php
-	session_start();
 	require('../database/connection.php');
 	require("../utils/validators.php");
 	require("../utils/passwordManager.php");
 
+	if (empty($_SESSION)  && !isset($_SESSION)) session_start();
+
   $root = "/ericknathan/crud-php";
 
-	if(!isset($_POST["action"])){
+	if(!isset($_REQUEST["action"])){
 		$_SESSION['errors'][] = "Não foi possível realizar essa ação";
 		header("Location: $root");
 		exit();
 	}
 
-	switch ($_POST['action']) {
+	switch ($_REQUEST['action']) {
 		case 'login':
 			handleAuthSignIn();
 			break;
@@ -20,27 +21,25 @@
 			handleAuthLogout();
 			break;
 	}
-
 	header("Location: $root");
 	exit();
 
 	function handleAuthSignIn() {
 		global $conn;
-		global $root;
 
 		$errors = validateAuth();
 		verifyErrors($errors);
 		
-		$email = strtolower($_POST['email']);
+		$username = strtolower($_POST['username']);
 		$textPassword = $_POST['password'];
 
-		$sql = "SELECT * FROM tbl_user WHERE email='$email'";
+		$sql = "SELECT * FROM tbl_admin WHERE username='$username'";
 		$user = mysqli_fetch_array(mysqli_query($conn, $sql));
 
 		if(checkPassword($textPassword, $user['password'])) {
 			$_SESSION["user_id"] = $user['id'];
 			$_SESSION["session_id"] = session_id();
-			$_SESSION["date"] = date('d/m/Y - h:i:s');    
+			$_SESSION["date"] = date('d/m/Y - h:i:s');   
 		} else {
 			$_SESSION['errors'][] = "Usuário ou senha incorretos";
 		}

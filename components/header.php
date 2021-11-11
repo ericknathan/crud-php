@@ -1,6 +1,11 @@
 <?php
-    session_start();
+	if(empty($_SESSION)  && !isset($_SESSION)) session_start();
+    
     $root = "/ericknathan/crud-php";
+
+    if(!isset($_SESSION['user_id']) && strpos($_SERVER['REQUEST_URI'], 'login') == false) {
+        header("Location: $root/auth/login");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,7 +26,7 @@
         <?php if(isset($_SESSION['user_id'])) { ?>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $root ?>/cadastro">Cadastrar</a>
+                    <a class="nav-link" href="<?= $root ?>/user/create.php">Cadastrar</a>
                 </li>
             </ul>
 
@@ -33,7 +38,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $root ?>/auth/login/">Sair</a>
+                    <a class="nav-link" onclick="" href="<?= $root ?>/auth/authActions.php?action=logout">Sair</a>
                 </li>
             </ul>
         <?php } ?>
